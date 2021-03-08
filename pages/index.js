@@ -1,10 +1,15 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import CardList from '../components/CardList';
 
 export default function Home({ data }) {
 
-  const robots = []
+  const robots = data
   console.log(data);
+
+  const filteredRobots = robots.filter((robot) => {
+    return robot.name
+  })
 
   return (
     <div className={styles.container}>
@@ -15,6 +20,7 @@ export default function Home({ data }) {
       {!robots.length ? (<h1>Loading</h1>) : (
         <div className='tc'>
           <h1 className='f1'>RoboFriends</h1>
+          <CardList robots={filteredRobots} />
         </div>
       )}
     </div>
