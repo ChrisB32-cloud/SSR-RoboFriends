@@ -1,14 +1,21 @@
+import React, { useState } from 'react'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import CardList from '../components/CardList';
+import Scroll from '../components/Scroll';
+import SearchBox from '../components/SearchBox';
 
 export default function Home({ data }) {
 
   const robots = data
-  console.log(data);
+  const [searchField, setSearchField] = useState('')
+
+  const onSearchChange = (e) => {
+    setSearchField(e.target.value)
+  }
 
   const filteredRobots = robots.filter((robot) => {
-    return robot.name
+    return robot.name.toLowerCase().includes(searchField.toLowerCase())
   })
 
   return (
@@ -20,7 +27,10 @@ export default function Home({ data }) {
       {!robots.length ? (<h1>Loading</h1>) : (
         <div className='tc'>
           <h1 className='f1'>RoboFriends</h1>
-          <CardList robots={filteredRobots} />
+          <SearchBox searchChange={onSearchChange} />
+          <Scroll>
+            <CardList robots={filteredRobots} />
+          </Scroll>
         </div>
       )}
     </div>
