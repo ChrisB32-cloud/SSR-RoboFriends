@@ -18,6 +18,8 @@ export default function Home({ data }) {
     return robot.name.toLowerCase().includes(searchField.toLowerCase())
   })
 
+  // Need to import sega font for h1 title
+
   return (
     <div className={styles.container}>
       <Head>
